@@ -1,7 +1,25 @@
 import 'package:snapshop/core/common/shared/shared_imports.dart';
+import 'package:snapshop/feature/profile/presentation/screen/my_profile_screen.dart';
 
-class ProfileScreen extends StatelessWidget {
+class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
+
+  @override
+  State<ProfileScreen> createState() => _ProfileScreenState();
+}
+
+class _ProfileScreenState extends State<ProfileScreen> {
+  String? name;
+  @override
+  void initState() {
+    super.initState();
+    _loadName();
+  }
+
+  void _loadName() async {
+    name = await SharedPrefHelper.getSecuredString(PrefKeys.userName);
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,12 +31,20 @@ class ProfileScreen extends StatelessWidget {
           children: [
             Center(child: Image.asset(ImageAsset.profile, width: 120.w)),
             SizedBox(height: 10.h),
-            Text("User full Name", style: TextStyle(color: Colors.black87)),
+            Text("$name", style: TextStyle(color: Colors.black87)),
             SizedBox(height: 20.h),
-            ListTile(
-              leading: Icon(IconlyBold.profile),
-              title: Text("My Profile"),
-              trailing: Icon(Icons.arrow_forward_ios_rounded),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyProfileScreen()),
+                );
+              },
+              child: ListTile(
+                leading: Icon(IconlyBold.profile),
+                title: Text("My Profile"),
+                trailing: Icon(Icons.arrow_forward_ios_rounded),
+              ),
             ),
             SizedBox(height: 15.h),
             ListTile(

@@ -97,6 +97,52 @@ class _AppServiceClient implements AppServiceClient {
   }
 
   @override
+  Future<ApiSuccessGeneralModel> updateProfile(
+    String? name,
+    String? phone,
+    MultipartFile? image,
+  ) async {
+    final _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    queryParameters.removeWhere((k, v) => v == null);
+    final _headers = <String, dynamic>{};
+    final _data = FormData();
+    if (name != null) {
+      _data.fields.add(MapEntry('name', name));
+    }
+    if (phone != null) {
+      _data.fields.add(MapEntry('phone', phone));
+    }
+    if (image != null) {
+      _data.files.add(MapEntry('image', image));
+    }
+    final _options = _setStreamType<ApiSuccessGeneralModel>(
+      Options(
+            method: 'PUT',
+            headers: _headers,
+            extra: _extra,
+            contentType: 'multipart/form-data',
+          )
+          .compose(
+            _dio.options,
+            'update_profile',
+            queryParameters: queryParameters,
+            data: _data,
+          )
+          .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
+    );
+    final _result = await _dio.fetch<Map<String, dynamic>>(_options);
+    late ApiSuccessGeneralModel _value;
+    try {
+      _value = ApiSuccessGeneralModel.fromJson(_result.data!);
+    } on Object catch (e, s) {
+      errorLogger?.logError(e, s, _options, response: _result);
+      rethrow;
+    }
+    return _value;
+  }
+
+  @override
   Future<SliderModel> getSliders() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};

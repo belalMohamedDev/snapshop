@@ -25,6 +25,15 @@ abstract class AppServiceClient {
     @Part(name: "phone") String phone,
   );
 
+  @PUT(ApiConstants.updateProfile)
+  @MultiPart()
+  Future<ApiSuccessGeneralModel> updateProfile(
+    @Part(name: "name") String? name,
+    @Part(name: "phone") String? phone,
+    @Part(name: "image") MultipartFile ? image,
+
+  );
+
   @GET(ApiConstants.sliders)
   Future<SliderModel> getSliders();
 
