@@ -1,5 +1,6 @@
 import 'package:snapshop/core/common/shared/shared_imports.dart';
 import 'package:snapshop/feature/category/cubit/category_cubit.dart';
+import 'package:snapshop/feature/category/presentation/screen/product_category_screen.dart';
 
 class CategoryWidget extends StatelessWidget {
   const CategoryWidget({super.key, this.isHomeScreen = false});
@@ -40,7 +41,13 @@ class CategoryWidget extends StatelessWidget {
                           padding: EdgeInsets.only(right: 15.w),
                           child: GestureDetector(
                             onTap: () => isHomeScreen == true
-                                ? null
+                                ? Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) =>
+                                          ProductsCategoryScreen(category),
+                                    ),
+                                  )
                                 : context.read<CategoryCubit>().selectCategory(
                                     category.id!,
                                   ),
