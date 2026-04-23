@@ -1,3 +1,5 @@
+import 'package:snapshop/feature/home/data/model/product_model.dart';
+
 class CategoryModel {
   List<Categories>? categories;
   bool? status;
@@ -31,8 +33,13 @@ class Categories {
   List<Products>? products;
   String? title;
 
-  Categories(
-      {this.description, this.id, this.imagePath, this.products, this.title});
+  Categories({
+    this.description,
+    this.id,
+    this.imagePath,
+    this.products,
+    this.title,
+  });
 
   Categories.fromJson(Map<String, dynamic> json) {
     description = json['description'];
@@ -56,51 +63,6 @@ class Categories {
       data['products'] = products!.map((v) => v.toJson()).toList();
     }
     data['title'] = title;
-    return data;
-  }
-}
-
-class Products {
-  int? bestSeller;
-  String? description;
-  int? id;
-  String? imagePath;
-  bool? isFavorite;
-  String? name;
-  double? price;
-  double? rating;
-
-  Products(
-      {this.bestSeller,
-      this.description,
-      this.id,
-      this.imagePath,
-      this.isFavorite,
-      this.name,
-      this.price,
-      this.rating});
-
-  Products.fromJson(Map<String, dynamic> json) {
-    bestSeller = json['best_seller'];
-    description = json['description'];
-    id = json['id'];
-    imagePath = json['image_path'];
-    isFavorite = json['is_favorite'];
-    name = json['name'];
-    price = json['price'];
-    rating = json['rating'];
-  }
-
-  Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = <String, dynamic>{};
-    data['best_seller'] = bestSeller;
-    data['description'] = description;
-    data['id'] = id;
-    data['image_path'] = imagePath;
-    data['is_favorite'] = isFavorite;
-    data['name'] = name;
-    data['price'] = price;
-    data['rating'] = rating;
     return data;
   }
 }
