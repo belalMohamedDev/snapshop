@@ -1,5 +1,6 @@
 import 'package:snapshop/core/common/shared/shared_imports.dart';
 import 'package:snapshop/feature/profile/presentation/screen/my_profile_screen.dart';
+import 'package:snapshop/feature/profile/presentation/screen/orders_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -47,10 +48,18 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ),
             ),
             SizedBox(height: 15.h),
-            ListTile(
-              leading: Icon(IconlyBold.bag),
-              title: Text("My Orders"),
-              trailing: Icon(Icons.arrow_forward_ios_rounded),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MyOrdersScreen()),
+                );
+              },
+              child: ListTile(
+                leading: Icon(IconlyBold.bag),
+                title: Text("My Orders"),
+                trailing: Icon(Icons.arrow_forward_ios_rounded),
+              ),
             ),
             SizedBox(height: 15.h),
             ListTile(

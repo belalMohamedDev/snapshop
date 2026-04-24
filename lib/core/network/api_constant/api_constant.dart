@@ -7,6 +7,7 @@ class ApiConstants {
   static const String register = 'register';
   static const String updateProfile = 'update_profile';
   static const String sliders = 'sliders';
+  static const String orders = 'orders';
   static const String categories = 'categories';
   static const String topRatedProducts = 'top_rated_products';
   static const String bestSellerProducts = 'best_seller_products';

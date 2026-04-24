@@ -1,5 +1,5 @@
 import 'package:snapshop/core/common/shared/shared_imports.dart';
-import 'package:snapshop/feature/profile/cubit/update_profile_cubit.dart';
+import 'package:snapshop/feature/profile/logic/UpdateProfileCubit/update_profile_cubit.dart';
 
 class MyProfileScreen extends StatelessWidget {
   const MyProfileScreen({super.key});

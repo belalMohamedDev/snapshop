@@ -96,6 +96,7 @@ class ProductDetails extends StatelessWidget {
               ],
             ),
             SizedBox(height: 35.h),
+            //TODO: Add to cart local storage
             SizedBox(
               width: 325.w,
               height: 45.h,

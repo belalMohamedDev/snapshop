@@ -9,8 +9,10 @@ import 'package:snapshop/feature/home/logic/homeCubit/home_cubit.dart';
 import 'package:snapshop/feature/home/data/repo/home_repo.dart';
 import 'package:snapshop/feature/home/logic/productCubit/product_cubit.dart';
 import 'package:snapshop/feature/onBoarding/logic/cubit/on_boarding_cubit.dart';
-import 'package:snapshop/feature/profile/cubit/update_profile_cubit.dart';
+import 'package:snapshop/feature/profile/data/repo/orders_repo.dart';
+import 'package:snapshop/feature/profile/logic/UpdateProfileCubit/update_profile_cubit.dart';
 import 'package:snapshop/feature/profile/data/repo/update_profile_repo.dart';
+import 'package:snapshop/feature/profile/logic/cubit/orders_cubit.dart';
 
 final instance = GetIt.instance;
 
@@ -22,6 +24,7 @@ Future<void> initAppModule() async {
     _initHomeModule(),
     _initCategoryModule(),
     _initUpdateProfileModule(),
+    _initOrdersModule(),
   ]);
 }
 
@@ -75,4 +78,10 @@ Future<void> _initUpdateProfileModule() async {
       () => UpdateProfileRepoImpl(instance()),
     )
     ..registerFactory<UpdateProfileCubit>(() => UpdateProfileCubit(instance()));
+}
+
+Future<void> _initOrdersModule() async {
+  instance
+    ..registerLazySingleton<OrdersRepo>(() => OrdersRepoImpl(instance()))
+    ..registerFactory<OrdersCubit>(() => OrdersCubit(instance()));
 }

@@ -5,6 +5,7 @@ import 'package:snapshop/feature/auth/data/model/auth_response.dart';
 import 'package:snapshop/feature/category/data/model/category_model.dart';
 import 'package:snapshop/feature/home/data/model/product_model.dart';
 import 'package:snapshop/feature/home/data/model/slider_model.dart';
+import 'package:snapshop/feature/profile/data/model/orders_model.dart';
 
 part 'app_api.g.dart';
 
@@ -30,12 +31,14 @@ abstract class AppServiceClient {
   Future<ApiSuccessGeneralModel> updateProfile(
     @Part(name: "name") String? name,
     @Part(name: "phone") String? phone,
-    @Part(name: "image") MultipartFile ? image,
-
+    @Part(name: "image") MultipartFile? image,
   );
 
   @GET(ApiConstants.sliders)
   Future<SliderModel> getSliders();
+
+  @GET(ApiConstants.orders)
+  Future<OrdersModel> getOrders();
 
   @GET(ApiConstants.categories)
   Future<CategoryModel> getCategories();
