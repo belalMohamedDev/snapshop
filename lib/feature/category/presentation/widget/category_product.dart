@@ -37,7 +37,7 @@ class CategoryProduct extends StatelessWidget {
             return SliverGrid(
               delegate: SliverChildBuilderDelegate((context, index) {
                 final product = products[index];
-                return _ProductCard(product: product);
+                return ProductCard(product: product);
               }, childCount: products.length),
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 2,
@@ -54,10 +54,10 @@ class CategoryProduct extends StatelessWidget {
   }
 }
 
-class _ProductCard extends StatelessWidget {
+class ProductCard extends StatelessWidget {
   final Products product;
 
-  const _ProductCard({required this.product});
+  const ProductCard({super.key, required this.product});
 
   @override
   Widget build(BuildContext context) {

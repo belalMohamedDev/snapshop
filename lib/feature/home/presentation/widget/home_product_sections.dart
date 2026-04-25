@@ -18,7 +18,7 @@ class HomeProductSections extends StatelessWidget {
         return Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            _SectionTitle(title: context.translate("topRated") ?? 'Top Rated'),
+            _SectionTitle(title: context.translate("topRated")),
             SizedBox(height: 12.h),
             _TopRatedSection(
               products: topRatedProducts,
@@ -29,7 +29,7 @@ class HomeProductSections extends StatelessWidget {
               onRetry: productCubit.getTopRatedProducts,
             ),
             SizedBox(height: 24.h),
-            _SectionTitle(title: context.translate("bestSeller") ?? 'Best Seller'),
+            _SectionTitle(title: context.translate("bestSeller")),
             SizedBox(height: 10.h),
             _BestSellerSection(
               products: bestSellerProducts,
@@ -237,7 +237,7 @@ class _TopRatedSection extends StatelessWidget {
                           borderRadius: BorderRadius.circular(30.r),
                         ),
                         child: Text(
-                          context.translate("topRated") ?? 'Top rated',
+                          context.translate("topRated"),
                           style: TextStyle(
                             fontSize: 10.sp,
                             fontWeight: FontWeight.w700,
@@ -416,7 +416,7 @@ class _BestSellerSection extends StatelessWidget {
                                 borderRadius: BorderRadius.circular(30.r),
                               ),
                               child: Text(
-                                context.translate("bestSeller") ?? 'Best seller',
+                                context.translate("bestSeller"),
                                 style: TextStyle(
                                   fontSize: 10.sp,
                                   fontWeight: FontWeight.w700,
@@ -475,7 +475,7 @@ class _SectionFeedbackCard extends StatelessWidget {
                 tapTargetSize: MaterialTapTargetSize.shrinkWrap,
               ),
               child: Text(
-                context.translate("tryAgain") ?? 'Try again',
+                context.translate("tryAgain"),
                 style: TextStyle(
                   fontSize: 12.sp,
                   fontWeight: FontWeight.w700,

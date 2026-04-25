@@ -14,4 +14,5 @@ class ApiConstants {
   static const String placeOrder = 'place_order';
   static const String cancelOrder = 'orders/cancel';
   static const String refreshToken = '${baseUrl}refresh_token';
+  static const String search = 'products/search';
 }

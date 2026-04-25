@@ -26,7 +26,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(context.translate("profile")), centerTitle: true),
+      appBar: AppBar(
+        title: Text(context.translate("profile")),
+        centerTitle: true,
+      ),
       body: Padding(
         padding: EdgeInsets.only(left: 8.w, right: 8.w),
         child: Column(
@@ -89,6 +92,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
             SizedBox(height: 10.h),
             ListTile(
+              onTap: () async {
+                await SharedPrefHelper.clearAllSecuredData();
+                if (!context.mounted) return;
+                Navigator.pushNamedAndRemoveUntil(
+                  context,
+                  Routes.loginRoute,
+                  (route) => false,
+                );
+              },
               leading: Icon(IconlyBold.logout),
               title: Text(context.translate("logOut")),
 

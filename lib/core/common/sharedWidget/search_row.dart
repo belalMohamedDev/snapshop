@@ -1,4 +1,5 @@
 import 'package:snapshop/core/common/shared/shared_imports.dart';
+import 'package:snapshop/feature/search/search_view.dart';
 
 class SearchRow extends StatelessWidget {
   const SearchRow({super.key});
@@ -13,7 +14,10 @@ class SearchRow extends StatelessWidget {
       onTap: () {
         // Navigate to the search screen when the row is tapped
 
-        context.pushNamed(Routes.search);
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) => SearchView()),
+        );
       },
       child: Row(
         children: [

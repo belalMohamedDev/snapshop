@@ -57,4 +57,7 @@ abstract class AppServiceClient {
 
   @POST("${ApiConstants.cancelOrder}/{id}")
   Future<ApiSuccessGeneralModel> cancelOrder(@Path('id') int id);
+
+  @GET(ApiConstants.search)
+  Future<ProductModel> search(@Query("q") String q);
 }

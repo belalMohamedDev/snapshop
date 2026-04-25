@@ -183,7 +183,11 @@ Widget _orderHeader(BuildContext context, Order order, OrderType type) {
           ),
           Text(
             statusText,
-            style: TextStyle(color: statusColor, fontWeight: FontWeight.bold),
+            style: TextStyle(
+              color: statusColor,
+              fontWeight: FontWeight.bold,
+              fontSize: 15.sp,
+            ),
           ),
         ],
       ),
@@ -221,7 +225,7 @@ class OrderItemCard extends StatelessWidget {
                   item.imagePath ?? "",
                   width: 90.w,
                   height: 90.h,
-                  fit: BoxFit.fill,
+                  fit: BoxFit.cover,
                   errorBuilder: (_, _, _) => Container(
                     width: 80,
                     height: 80,

@@ -25,6 +25,7 @@ class MyOrdersScreen extends StatelessWidget {
               labelColor: Colors.black,
               indicatorColor: Colors.black,
               unselectedLabelColor: Colors.black54,
+              labelStyle: TextStyle(fontSize: 14.sp,),
               tabs: [
                 Tab(text: context.translate("active")),
                 Tab(text: context.translate("completedOrders")),

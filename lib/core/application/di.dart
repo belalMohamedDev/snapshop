@@ -15,6 +15,8 @@ import 'package:snapshop/feature/profile/data/repo/orders_repo.dart';
 import 'package:snapshop/feature/profile/logic/UpdateProfileCubit/update_profile_cubit.dart';
 import 'package:snapshop/feature/profile/data/repo/update_profile_repo.dart';
 import 'package:snapshop/feature/profile/logic/cubit/orders_cubit.dart';
+import 'package:snapshop/feature/search/cubit/search_cubit.dart';
+import 'package:snapshop/feature/search/data/repo/search_repo.dart';
 
 final instance = GetIt.instance;
 
@@ -28,6 +30,7 @@ Future<void> initAppModule() async {
     _initCartModule(),
     _initUpdateProfileModule(),
     _initOrdersModule(),
+    _initSearchModule(),
   ]);
 }
 
@@ -93,4 +96,10 @@ Future<void> _initOrdersModule() async {
   instance
     ..registerLazySingleton<OrdersRepo>(() => OrdersRepoImpl(instance()))
     ..registerFactory<OrdersCubit>(() => OrdersCubit(instance()));
+}
+
+Future<void> _initSearchModule() async {
+  instance
+    ..registerLazySingleton<SearchRepo>(() => SearchRepo(instance()))
+    ..registerFactory<SearchCubit>(() => SearchCubit(instance()));
 }

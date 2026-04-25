@@ -42,6 +42,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
         borderWidth: 2,
         outlineBorderColor: Colors.white,
         onTap: _handleIndexChanged,
+        paddingR: EdgeInsets.only(left: 20, right: 20),
         items: [
           /// Home
           CrystalNavigationBarItem(

@@ -15,7 +15,7 @@ class HomeHeader extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              context.translate("helloBelal") ?? "Hello, Belal 👋",
+              "Hello, $userName 👋",
               style: TextStyle(
                 fontSize: 16.sp,
                 fontWeight: FontWeight.w600,
@@ -24,7 +24,7 @@ class HomeHeader extends StatelessWidget {
             ),
             SizedBox(height: 4.h),
             Text(
-              context.translate("welcomeToElminiawyPatisserie") ?? "Welcome to the SnapShop App",
+              context.translate("welcomeToElminiawyPatisserie"),
               style: TextStyle(fontSize: 12.sp, color: Colors.black54),
             ),
           ],
