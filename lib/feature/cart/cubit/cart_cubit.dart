@@ -77,4 +77,5 @@ class CartCubit extends Cubit<CartState> {
       },
     );
   }
+
 }

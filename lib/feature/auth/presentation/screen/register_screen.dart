@@ -43,7 +43,7 @@ class RegisterScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Create an\nAccount",
+                      context.translate("createAccount"),
                       textAlign: TextAlign.left,
 
                       style: TextStyle(
@@ -58,16 +58,16 @@ class RegisterScreen extends StatelessWidget {
                       controller: authCubit.fullName,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter your full name';
+                          return context.translate("pleaseEnterAValidName");
                         }
                         if (!AppRegex.isNameValid(value)) {
-                          return "Enter a valid name";
+                          return context.translate("pleaseEnterAValidName");
                         }
 
                         return null;
                       },
                       decoration: InputDecoration(
-                        hintText: "Full Name",
+                        hintText: context.translate("firstName"),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(8.r)),
                           borderSide: BorderSide(color: Colors.black54),
@@ -81,15 +81,15 @@ class RegisterScreen extends StatelessWidget {
                       controller: authCubit.phone,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return 'Please enter your phone number';
+                          return context.translate("pleaseEnterAValidPhoneNumber");
                         }
                         if (!AppRegex.isPhoneNumberValid(value)) {
-                          return "Enter a valid phone number";
+                          return context.translate("pleaseEnterAValidPhoneNumber");
                         }
                         return null;
                       },
                       decoration: InputDecoration(
-                        hintText: "Phone",
+                        hintText: context.translate("phone"),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(8.r)),
                           borderSide: BorderSide(color: Colors.black54),
@@ -103,17 +103,17 @@ class RegisterScreen extends StatelessWidget {
                       controller: authCubit.email,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "Email is required";
+                          return context.translate("pleaseEnterValidEmail");
                         }
 
                         if (!AppRegex.isEmailValid(value)) {
-                          return "Enter a valid email";
+                          return context.translate("pleaseEnterValidEmail");
                         }
 
                         return null;
                       },
                       decoration: InputDecoration(
-                        hintText: "Email",
+                        hintText: context.translate("email"),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(8.r)),
                           borderSide: BorderSide(color: Colors.black54),
@@ -127,11 +127,11 @@ class RegisterScreen extends StatelessWidget {
                       controller: authCubit.password,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "Password is required";
+                          return context.translate("pleaseEnterValidPassword");
                         }
 
                         if (!AppRegex.isPasswordValid(value)) {
-                          return "Enter a valid password";
+                          return context.translate("pleaseEnterValidPassword");
                         }
 
                         return null;
@@ -139,7 +139,7 @@ class RegisterScreen extends StatelessWidget {
                       obscureText: authCubit.showPass,
 
                       decoration: InputDecoration(
-                        hintText: "Password",
+                        hintText: context.translate("password"),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(8.r)),
                           borderSide: BorderSide(color: Colors.black54),
@@ -164,11 +164,11 @@ class RegisterScreen extends StatelessWidget {
 
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "Password is required";
+                          return context.translate("pleaseEnterValidPassword");
                         }
 
                         if (!AppRegex.isPasswordValid(value)) {
-                          return "Enter a valid password";
+                          return context.translate("pleaseEnterValidPassword");
                         }
 
                         return null;
@@ -179,7 +179,7 @@ class RegisterScreen extends StatelessWidget {
                           borderRadius: BorderRadius.all(Radius.circular(8.r)),
                           borderSide: BorderSide(color: Colors.black54),
                         ),
-                        hintText: "Password Confirmation",
+                        hintText: context.translate("confirmPassword"),
                         suffixIcon: IconButton(
                           onPressed: () =>
                               authCubit.toggleShowConfirmPassword(),
@@ -212,7 +212,7 @@ class RegisterScreen extends StatelessWidget {
                                 strokeWidth: 2,
                               ),
                           orElse: () => Text(
-                            "Create Account",
+                            context.translate("signUp"),
                             style: TextStyle(
                               fontSize: 16.sp,
                               color: Colors.white,
@@ -225,14 +225,14 @@ class RegisterScreen extends StatelessWidget {
                     Center(
                       child: Text.rich(
                         TextSpan(
-                          text: "Already have an account? ",
+                          text: "${context.translate("alreadyHaveAccount")} ",
                           style: TextStyle(
                             fontSize: 14.sp,
                             color: Colors.black54,
                           ),
                           children: [
                             TextSpan(
-                              text: "Login",
+                              text: context.translate("logIn"),
                               style: TextStyle(
                                 fontSize: 14.sp,
                                 color: Colors.black,

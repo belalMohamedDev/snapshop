@@ -23,4 +23,21 @@ class OrdersCubit extends Cubit<OrdersState> {
       },
     );
   }
+
+  Future<void> fetchCancelOrder(int id) async {
+    emit(const OrdersState.cancelOrderLoading());
+
+    final response = await _ordersRepo.deleteOrder(id);
+
+    response.when(
+      success: (successModel) {
+        emit(
+          OrdersState.cancelOrderSuccess(apiSuccessGeneralModel: successModel),
+        );
+      },
+      failure: (error) {
+        emit(OrdersState.cancelOrderFailure(error));
+      },
+    );
+  }
 }

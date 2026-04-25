@@ -38,6 +38,13 @@ class _MyAppState extends State<MyApp> {
                 initialRoute: _getInitialRoute(),
                 onGenerateRoute: RouteGenerator.getRoute,
                 theme: getApplicationTheme(context),
+                locale: state.maybeWhen(
+                  languageChange: (locale) => locale,
+                  orElse: () => Locale(context.read<AppLogicCubit>().currentLangCode),
+                ),
+                supportedLocales: AppLocalizationsSetup.supportedLocales,
+                localizationsDelegates: AppLocalizationsSetup.localizationsDelegates,
+                localeResolutionCallback: AppLocalizationsSetup.localeResolutionCallback,
               );
             },
           );

@@ -8,9 +8,8 @@ class CartState with _$CartState {
       _Loaded;
 
   const factory CartState.placeOrderLoading() = _PlaceOrderLoading;
-  const factory CartState.placeOrderSuccess({
-    ApiSuccessGeneralModel? apiSuccessGeneralModel,
-  }) = _PlaceOrderSuccess;
   const factory CartState.placeOrderFailure(ApiErrorModel error) =
       _PlaceOrderFailure;
+
+
 }

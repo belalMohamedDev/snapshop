@@ -2,7 +2,7 @@
   "driverData": "بيانات المندوب",
   "userData": "بيانات العميل",
   "noRouteFound": "لم يتم العثور على طريق",
-  "welcomeToElminiawyPatisserie": "مرحبًا بك في سويتنا، تذوق السعادة مع كل قضمة!",
+  "welcomeToElminiawyPatisserie": "مرحبًا بك فى سناب شوب",
   "discoverOurWonderfulSelection": "اكتشف تشكيلتنا الرائعة من المعجنات الطازجة والمخبوزات، المعدة بحب وشغف.",
   "letsGetStarted": "هيا بنا لنبدأ !",
   "alreadyHaveAnAccount": "هل لديك حساب بالفعل؟",
@@ -377,5 +377,11 @@
   "locationDisclosureBody": "يقوم تطبيق سويتنا بجمع بيانات الموقع لعرض أقرب الفروع إليك وتقديم خدمات توصيل دقيقة، حتى عندما يكون التطبيق مغلقاً أو غير مستخدم. هذه البيانات ضرورية لحساب رسوم التوصيل وتحديد المتجر الأقرب لموقعك.",
   "locationDisclosureAllow": "السماح بالوصول",
   "locationDisclosureCancel": "ليس الآن",
-  "locationPermissionDeniedMessage": "تم رفض إذن الوصول للموقع. قد لا تعمل بعض الميزات مثل العثور على الفروع القريبة بشكل صحيح."
+  "locationPermissionDeniedMessage": "تم رفض إذن الوصول للموقع. قد لا تعمل بعض الميزات مثل العثور على الفروع القريبة بشكل صحيح.",
+  "topRated": "الأعلى تقييماً",
+  "bestSeller": "الأكثر مبيعاً",
+  "tryAgain": "حاول مرة أخرى",
+  "allFeatured": "الكل",
+  "helloBelal": "مرحباً بلال 👋",
+  "next": "التالي"
 }

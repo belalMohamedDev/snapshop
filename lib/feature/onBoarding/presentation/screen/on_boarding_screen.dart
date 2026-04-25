@@ -45,7 +45,7 @@ class OnBoardingScreen extends StatelessWidget {
                       backgroundColor: WidgetStatePropertyAll(Colors.black),
                     ),
                     child: Text(
-                      cubit.currentIndex == 2 ? "Get Started" : "Next",
+                      cubit.currentIndex == 2 ? context.translate("letsGetStarted") : context.translate("next"),
                       style: TextStyle(fontSize: 16.sp, color: Colors.white),
                     ),
                   ),

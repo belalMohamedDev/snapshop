@@ -1,6 +1,7 @@
 import 'package:snapshop/core/common/shared/shared_imports.dart';
 import 'package:snapshop/feature/profile/presentation/screen/my_profile_screen.dart';
 import 'package:snapshop/feature/profile/presentation/screen/orders_screen.dart';
+import 'package:snapshop/feature/profile/presentation/screen/settings_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -25,7 +26,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Profile"), centerTitle: true),
+      appBar: AppBar(title: Text(context.translate("profile")), centerTitle: true),
       body: Padding(
         padding: EdgeInsets.only(left: 8.w, right: 8.w),
         child: Column(
@@ -43,7 +44,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
               child: ListTile(
                 leading: Icon(IconlyBold.profile),
-                title: Text("My Profile"),
+                title: Text(context.translate("myProfile")),
+
                 trailing: Icon(Icons.arrow_forward_ios_rounded),
               ),
             ),
@@ -57,27 +59,39 @@ class _ProfileScreenState extends State<ProfileScreen> {
               },
               child: ListTile(
                 leading: Icon(IconlyBold.bag),
-                title: Text("My Orders"),
+                title: Text(context.translate("myOrders")),
+
                 trailing: Icon(Icons.arrow_forward_ios_rounded),
               ),
             ),
             SizedBox(height: 15.h),
             ListTile(
               leading: Icon(IconlyBold.heart),
-              title: Text("My Favorites"),
+              title: Text(context.translate("wishList")),
+
               trailing: Icon(Icons.arrow_forward_ios_rounded),
             ),
             SizedBox(height: 15.h),
-            ListTile(
-              leading: Icon(IconlyBold.setting),
-              title: Text("Settings"),
-              trailing: Icon(Icons.arrow_forward_ios_rounded),
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => SettingsScreen()),
+                );
+              },
+              child: ListTile(
+                leading: Icon(IconlyBold.setting),
+                title: Text(context.translate("settings")),
+
+                trailing: Icon(Icons.arrow_forward_ios_rounded),
+              ),
             ),
 
             SizedBox(height: 10.h),
             ListTile(
               leading: Icon(IconlyBold.logout),
-              title: Text("Log Out"),
+              title: Text(context.translate("logOut")),
+
               trailing: Icon(Icons.arrow_forward_ios_rounded),
             ),
           ],

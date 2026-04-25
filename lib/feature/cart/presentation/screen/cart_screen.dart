@@ -8,7 +8,7 @@ class CartScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Cart"),
+        title: Text(context.translate("myCart")),
         centerTitle: true,
         elevation: 0,
         backgroundColor: Colors.white,
@@ -26,7 +26,7 @@ class CartScreen extends StatelessWidget {
                       Icon(IconlyLight.bag, size: 80.sp, color: Colors.black87),
                       SizedBox(height: 20.h),
                       Text(
-                        "Your cart is empty",
+                        context.translate("emptyCart"),
                         style: TextStyle(
                           fontSize: 18.sp,
                           fontWeight: FontWeight.w500,
@@ -40,7 +40,7 @@ class CartScreen extends StatelessWidget {
                           backgroundColor: WidgetStatePropertyAll(Colors.black),
                         ),
                         child: Text(
-                          "Continue Shopping",
+                          context.translate("continueShopping"),
                           style: TextStyle(
                             fontSize: 14.sp,
                             color: Colors.white,
@@ -172,7 +172,7 @@ class CartScreen extends StatelessWidget {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(
-                                      "Total Order (i)",
+                                      context.translate("totalAmount"),
                                       style: TextStyle(
                                         fontSize: 11.sp,
                                         fontWeight: FontWeight.w500,
@@ -285,7 +285,7 @@ class CartScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Subtotal",
+                              context.translate("subTotal"),
                               style: TextStyle(
                                 fontSize: 13.sp,
                                 fontWeight: FontWeight.w500,
@@ -307,7 +307,7 @@ class CartScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Tax and Fees",
+                              context.translate("tax"),
                               style: TextStyle(
                                 fontSize: 13.sp,
                                 fontWeight: FontWeight.w500,
@@ -329,7 +329,7 @@ class CartScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Delivery Fee",
+                              context.translate("deliveryFee"),
                               style: TextStyle(
                                 fontSize: 13.sp,
                                 fontWeight: FontWeight.w500,
@@ -353,7 +353,7 @@ class CartScreen extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
                             Text(
-                              "Order Total",
+                              context.translate("total"),
                               style: TextStyle(
                                 fontSize: 14.sp,
                                 fontWeight: FontWeight.w600,
@@ -394,7 +394,7 @@ class CartScreen extends StatelessWidget {
                                     color: Colors.white,
                                   ),
                               orElse: () => Text(
-                                "Checkout",
+                                context.translate("checkOut"),
                                 style: TextStyle(
                                   fontSize: 15.sp,
                                   color: Colors.white,
@@ -417,7 +417,7 @@ class CartScreen extends StatelessWidget {
                   Icon(IconlyLight.bag, size: 80.sp, color: Colors.black87),
                   SizedBox(height: 20.h),
                   Text(
-                    "Your cart is empty",
+                    context.translate("emptyCart"),
                     style: TextStyle(
                       fontSize: 18.sp,
                       fontWeight: FontWeight.w500,
@@ -431,7 +431,7 @@ class CartScreen extends StatelessWidget {
                       backgroundColor: WidgetStatePropertyAll(Colors.black),
                     ),
                     child: Text(
-                      "Continue Shopping",
+                      context.translate("continueShopping"),
                       style: TextStyle(fontSize: 14.sp, color: Colors.white),
                     ),
                   ),

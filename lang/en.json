@@ -1,7 +1,7 @@
 {
   "noRouteFound": "No Route Found",
   "userData": "User Data",
-  "welcomeToElminiawyPatisserie": "Welcome to Sweetna Taste happiness with every bite!",
+  "welcomeToElminiawyPatisserie": "Welcome to Snap Shop",
   "discoverOurWonderfulSelection": "Discover our wonderful selection of fresh pastries and baked goods,crafted with love and passion.",
   "letsGetStarted": "let’s Get Started",
   "alreadyHaveAnAccount": "Already have an account?",
@@ -377,5 +377,11 @@
   "locationDisclosureBody": "Sweetna collects location data to show you the nearest branches and provide accurate delivery services, even when the app is closed or not in use. This data is essential for calculating delivery fees and finding the closest store to your location.",
   "locationDisclosureAllow": "Allow Access",
   "locationDisclosureCancel": "Maybe Later",
-  "locationPermissionDeniedMessage": "Location permission was denied. Some features like finding nearby stores may not work properly."
+  "locationPermissionDeniedMessage": "Location permission was denied. Some features like finding nearby stores may not work properly.",
+  "topRated": "Top Rated",
+  "bestSeller": "Best Seller",
+  "tryAgain": "Try again",
+  "allFeatured": "All Featured",
+  "helloBelal": "Hello, Belal 👋",
+  "next": "Next"
 }

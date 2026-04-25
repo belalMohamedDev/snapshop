@@ -23,14 +23,14 @@ class AppUtils {
     if (permission == LocationPermission.denied) {
       permission = await Geolocator.requestPermission();
       if (permission == LocationPermission.denied) {
-        Navigator.pop(context);
+        if (context.mounted) Navigator.pop(context);
         return Future.error('Location permissions are denied.');
       }
     }
 
     if (permission == LocationPermission.deniedForever) {
       log('Location permissions are permanently denied.');
-      Navigator.pop(context);
+      if (context.mounted) Navigator.pop(context);
       return Future.error('Location permissions are permanently denied.');
     }
 

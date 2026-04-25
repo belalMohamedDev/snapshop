@@ -17,7 +17,7 @@ class CategoryScreen extends StatelessWidget {
             SliverToBoxAdapter(child: SizedBox(height: 20.h)),
             SliverToBoxAdapter(
               child: Text(
-                'Products',
+                context.translate("products") ?? 'Products',
                 style: TextStyle(
                   fontSize: 14.sp,
                   fontWeight: FontWeight.bold,

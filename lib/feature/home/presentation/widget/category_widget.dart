@@ -18,7 +18,7 @@ class CategoryWidget extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    'All Featured',
+                    context.translate("allFeatured") ?? 'All Featured',
                     style: TextStyle(
                       fontSize: 14.sp,
                       fontWeight: FontWeight.bold,

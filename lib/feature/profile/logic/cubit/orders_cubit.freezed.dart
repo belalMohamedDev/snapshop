@@ -55,14 +55,17 @@ extension OrdersStatePatterns on OrdersState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _GetOrdersLoading value)?  getOrdersLoading,TResult Function( _getOrdersSuccess value)?  getOrdersSuccess,TResult Function( _getOrdersFailure value)?  getOrdersFailure,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _GetOrdersLoading value)?  getOrdersLoading,TResult Function( _getOrdersSuccess value)?  getOrdersSuccess,TResult Function( _getOrdersFailure value)?  getOrdersFailure,TResult Function( _CancelOrderLoading value)?  cancelOrderLoading,TResult Function( _CancelOrderSuccess value)?  cancelOrderSuccess,TResult Function( _CancelOrderFailure value)?  cancelOrderFailure,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case _GetOrdersLoading() when getOrdersLoading != null:
 return getOrdersLoading(_that);case _getOrdersSuccess() when getOrdersSuccess != null:
 return getOrdersSuccess(_that);case _getOrdersFailure() when getOrdersFailure != null:
-return getOrdersFailure(_that);case _:
+return getOrdersFailure(_that);case _CancelOrderLoading() when cancelOrderLoading != null:
+return cancelOrderLoading(_that);case _CancelOrderSuccess() when cancelOrderSuccess != null:
+return cancelOrderSuccess(_that);case _CancelOrderFailure() when cancelOrderFailure != null:
+return cancelOrderFailure(_that);case _:
   return orElse();
 
 }
@@ -80,14 +83,17 @@ return getOrdersFailure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _GetOrdersLoading value)  getOrdersLoading,required TResult Function( _getOrdersSuccess value)  getOrdersSuccess,required TResult Function( _getOrdersFailure value)  getOrdersFailure,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _GetOrdersLoading value)  getOrdersLoading,required TResult Function( _getOrdersSuccess value)  getOrdersSuccess,required TResult Function( _getOrdersFailure value)  getOrdersFailure,required TResult Function( _CancelOrderLoading value)  cancelOrderLoading,required TResult Function( _CancelOrderSuccess value)  cancelOrderSuccess,required TResult Function( _CancelOrderFailure value)  cancelOrderFailure,}){
 final _that = this;
 switch (_that) {
 case _Initial():
 return initial(_that);case _GetOrdersLoading():
 return getOrdersLoading(_that);case _getOrdersSuccess():
 return getOrdersSuccess(_that);case _getOrdersFailure():
-return getOrdersFailure(_that);case _:
+return getOrdersFailure(_that);case _CancelOrderLoading():
+return cancelOrderLoading(_that);case _CancelOrderSuccess():
+return cancelOrderSuccess(_that);case _CancelOrderFailure():
+return cancelOrderFailure(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -104,14 +110,17 @@ return getOrdersFailure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _GetOrdersLoading value)?  getOrdersLoading,TResult? Function( _getOrdersSuccess value)?  getOrdersSuccess,TResult? Function( _getOrdersFailure value)?  getOrdersFailure,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _GetOrdersLoading value)?  getOrdersLoading,TResult? Function( _getOrdersSuccess value)?  getOrdersSuccess,TResult? Function( _getOrdersFailure value)?  getOrdersFailure,TResult? Function( _CancelOrderLoading value)?  cancelOrderLoading,TResult? Function( _CancelOrderSuccess value)?  cancelOrderSuccess,TResult? Function( _CancelOrderFailure value)?  cancelOrderFailure,}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial(_that);case _GetOrdersLoading() when getOrdersLoading != null:
 return getOrdersLoading(_that);case _getOrdersSuccess() when getOrdersSuccess != null:
 return getOrdersSuccess(_that);case _getOrdersFailure() when getOrdersFailure != null:
-return getOrdersFailure(_that);case _:
+return getOrdersFailure(_that);case _CancelOrderLoading() when cancelOrderLoading != null:
+return cancelOrderLoading(_that);case _CancelOrderSuccess() when cancelOrderSuccess != null:
+return cancelOrderSuccess(_that);case _CancelOrderFailure() when cancelOrderFailure != null:
+return cancelOrderFailure(_that);case _:
   return null;
 
 }
@@ -128,13 +137,16 @@ return getOrdersFailure(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  getOrdersLoading,TResult Function( OrdersModel orderModel)?  getOrdersSuccess,TResult Function( ApiErrorModel apiError)?  getOrdersFailure,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  getOrdersLoading,TResult Function( OrdersModel orderModel)?  getOrdersSuccess,TResult Function( ApiErrorModel apiError)?  getOrdersFailure,TResult Function()?  cancelOrderLoading,TResult Function( ApiSuccessGeneralModel? apiSuccessGeneralModel)?  cancelOrderSuccess,TResult Function( ApiErrorModel error)?  cancelOrderFailure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _GetOrdersLoading() when getOrdersLoading != null:
 return getOrdersLoading();case _getOrdersSuccess() when getOrdersSuccess != null:
 return getOrdersSuccess(_that.orderModel);case _getOrdersFailure() when getOrdersFailure != null:
-return getOrdersFailure(_that.apiError);case _:
+return getOrdersFailure(_that.apiError);case _CancelOrderLoading() when cancelOrderLoading != null:
+return cancelOrderLoading();case _CancelOrderSuccess() when cancelOrderSuccess != null:
+return cancelOrderSuccess(_that.apiSuccessGeneralModel);case _CancelOrderFailure() when cancelOrderFailure != null:
+return cancelOrderFailure(_that.error);case _:
   return orElse();
 
 }
@@ -152,13 +164,16 @@ return getOrdersFailure(_that.apiError);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  getOrdersLoading,required TResult Function( OrdersModel orderModel)  getOrdersSuccess,required TResult Function( ApiErrorModel apiError)  getOrdersFailure,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  getOrdersLoading,required TResult Function( OrdersModel orderModel)  getOrdersSuccess,required TResult Function( ApiErrorModel apiError)  getOrdersFailure,required TResult Function()  cancelOrderLoading,required TResult Function( ApiSuccessGeneralModel? apiSuccessGeneralModel)  cancelOrderSuccess,required TResult Function( ApiErrorModel error)  cancelOrderFailure,}) {final _that = this;
 switch (_that) {
 case _Initial():
 return initial();case _GetOrdersLoading():
 return getOrdersLoading();case _getOrdersSuccess():
 return getOrdersSuccess(_that.orderModel);case _getOrdersFailure():
-return getOrdersFailure(_that.apiError);case _:
+return getOrdersFailure(_that.apiError);case _CancelOrderLoading():
+return cancelOrderLoading();case _CancelOrderSuccess():
+return cancelOrderSuccess(_that.apiSuccessGeneralModel);case _CancelOrderFailure():
+return cancelOrderFailure(_that.error);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -175,13 +190,16 @@ return getOrdersFailure(_that.apiError);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  getOrdersLoading,TResult? Function( OrdersModel orderModel)?  getOrdersSuccess,TResult? Function( ApiErrorModel apiError)?  getOrdersFailure,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  getOrdersLoading,TResult? Function( OrdersModel orderModel)?  getOrdersSuccess,TResult? Function( ApiErrorModel apiError)?  getOrdersFailure,TResult? Function()?  cancelOrderLoading,TResult? Function( ApiSuccessGeneralModel? apiSuccessGeneralModel)?  cancelOrderSuccess,TResult? Function( ApiErrorModel error)?  cancelOrderFailure,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
 return initial();case _GetOrdersLoading() when getOrdersLoading != null:
 return getOrdersLoading();case _getOrdersSuccess() when getOrdersSuccess != null:
 return getOrdersSuccess(_that.orderModel);case _getOrdersFailure() when getOrdersFailure != null:
-return getOrdersFailure(_that.apiError);case _:
+return getOrdersFailure(_that.apiError);case _CancelOrderLoading() when cancelOrderLoading != null:
+return cancelOrderLoading();case _CancelOrderSuccess() when cancelOrderSuccess != null:
+return cancelOrderSuccess(_that.apiSuccessGeneralModel);case _CancelOrderFailure() when cancelOrderFailure != null:
+return cancelOrderFailure(_that.error);case _:
   return null;
 
 }
@@ -378,6 +396,170 @@ class __$getOrdersFailureCopyWithImpl<$Res>
 @pragma('vm:prefer-inline') $Res call({Object? apiError = null,}) {
   return _then(_getOrdersFailure(
 null == apiError ? _self.apiError : apiError // ignore: cast_nullable_to_non_nullable
+as ApiErrorModel,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _CancelOrderLoading implements OrdersState {
+  const _CancelOrderLoading();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CancelOrderLoading);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'OrdersState.cancelOrderLoading()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _CancelOrderSuccess implements OrdersState {
+  const _CancelOrderSuccess({this.apiSuccessGeneralModel});
+  
+
+ final  ApiSuccessGeneralModel? apiSuccessGeneralModel;
+
+/// Create a copy of OrdersState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$CancelOrderSuccessCopyWith<_CancelOrderSuccess> get copyWith => __$CancelOrderSuccessCopyWithImpl<_CancelOrderSuccess>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CancelOrderSuccess&&(identical(other.apiSuccessGeneralModel, apiSuccessGeneralModel) || other.apiSuccessGeneralModel == apiSuccessGeneralModel));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,apiSuccessGeneralModel);
+
+@override
+String toString() {
+  return 'OrdersState.cancelOrderSuccess(apiSuccessGeneralModel: $apiSuccessGeneralModel)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$CancelOrderSuccessCopyWith<$Res> implements $OrdersStateCopyWith<$Res> {
+  factory _$CancelOrderSuccessCopyWith(_CancelOrderSuccess value, $Res Function(_CancelOrderSuccess) _then) = __$CancelOrderSuccessCopyWithImpl;
+@useResult
+$Res call({
+ ApiSuccessGeneralModel? apiSuccessGeneralModel
+});
+
+
+
+
+}
+/// @nodoc
+class __$CancelOrderSuccessCopyWithImpl<$Res>
+    implements _$CancelOrderSuccessCopyWith<$Res> {
+  __$CancelOrderSuccessCopyWithImpl(this._self, this._then);
+
+  final _CancelOrderSuccess _self;
+  final $Res Function(_CancelOrderSuccess) _then;
+
+/// Create a copy of OrdersState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? apiSuccessGeneralModel = freezed,}) {
+  return _then(_CancelOrderSuccess(
+apiSuccessGeneralModel: freezed == apiSuccessGeneralModel ? _self.apiSuccessGeneralModel : apiSuccessGeneralModel // ignore: cast_nullable_to_non_nullable
+as ApiSuccessGeneralModel?,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _CancelOrderFailure implements OrdersState {
+  const _CancelOrderFailure(this.error);
+  
+
+ final  ApiErrorModel error;
+
+/// Create a copy of OrdersState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$CancelOrderFailureCopyWith<_CancelOrderFailure> get copyWith => __$CancelOrderFailureCopyWithImpl<_CancelOrderFailure>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _CancelOrderFailure&&(identical(other.error, error) || other.error == error));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,error);
+
+@override
+String toString() {
+  return 'OrdersState.cancelOrderFailure(error: $error)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$CancelOrderFailureCopyWith<$Res> implements $OrdersStateCopyWith<$Res> {
+  factory _$CancelOrderFailureCopyWith(_CancelOrderFailure value, $Res Function(_CancelOrderFailure) _then) = __$CancelOrderFailureCopyWithImpl;
+@useResult
+$Res call({
+ ApiErrorModel error
+});
+
+
+
+
+}
+/// @nodoc
+class __$CancelOrderFailureCopyWithImpl<$Res>
+    implements _$CancelOrderFailureCopyWith<$Res> {
+  __$CancelOrderFailureCopyWithImpl(this._self, this._then);
+
+  final _CancelOrderFailure _self;
+  final $Res Function(_CancelOrderFailure) _then;
+
+/// Create a copy of OrdersState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? error = null,}) {
+  return _then(_CancelOrderFailure(
+null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
 as ApiErrorModel,
   ));
 }

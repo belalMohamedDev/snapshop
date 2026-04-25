@@ -13,7 +13,7 @@ class MyProfileScreen extends StatelessWidget {
           final updateProfileCubit = context.read<UpdateProfileCubit>();
 
           return Scaffold(
-            appBar: AppBar(title: Text("Profile"), centerTitle: true),
+            appBar: AppBar(title: Text(context.translate("myProfile")), centerTitle: true),
             body: Padding(
               padding: EdgeInsets.only(left: 25.w, right: 25.w),
               child: Column(
@@ -26,13 +26,13 @@ class MyProfileScreen extends StatelessWidget {
                     controller: updateProfileCubit.fullName,
                     validator: (value) {
                       if (!AppRegex.isNameValid(value!)) {
-                        return "Enter a valid email";
+                        return context.translate("pleaseEnterAValidName");
                       }
 
                       return null;
                     },
                     decoration: InputDecoration(
-                      hintText: "Full Name",
+                      hintText: context.translate("firstName"),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.all(Radius.circular(8.r)),
                         borderSide: BorderSide(color: Colors.black54),
@@ -44,7 +44,7 @@ class MyProfileScreen extends StatelessWidget {
                   TextFormField(
                     validator: (value) {
                       if (!AppRegex.isPhoneNumberValid(value!)) {
-                        return "Enter a valid Phone";
+                        return context.translate("pleaseEnterAValidPhoneNumber");
                       }
 
                       return null;
@@ -56,7 +56,7 @@ class MyProfileScreen extends StatelessWidget {
                         borderSide: BorderSide(color: Colors.black54),
                       ),
 
-                      hintText: "Phone",
+                      hintText: context.translate("phone"),
 
                       prefixIcon: Icon(Icons.phone, color: Colors.black54),
                     ),
@@ -79,7 +79,7 @@ class MyProfileScreen extends StatelessWidget {
                               strokeWidth: 2,
                             ),
                         orElse: () => Text(
-                          "Save",
+                          context.translate("save"),
                           style: TextStyle(
                             fontSize: 16.sp,
                             color: Colors.white,

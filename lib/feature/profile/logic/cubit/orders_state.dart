@@ -8,4 +8,11 @@ class OrdersState with _$OrdersState {
       _getOrdersSuccess;
   const factory OrdersState.getOrdersFailure(ApiErrorModel apiError) =
       _getOrdersFailure;
+
+  const factory OrdersState.cancelOrderLoading() = _CancelOrderLoading;
+  const factory OrdersState.cancelOrderSuccess({
+    ApiSuccessGeneralModel? apiSuccessGeneralModel,
+  }) = _CancelOrderSuccess;
+  const factory OrdersState.cancelOrderFailure(ApiErrorModel error) =
+      _CancelOrderFailure;
 }

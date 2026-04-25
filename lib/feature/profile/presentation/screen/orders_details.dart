@@ -1,22 +1,27 @@
 import 'package:snapshop/core/common/shared/shared_imports.dart';
 import 'package:snapshop/feature/profile/data/model/orders_model.dart';
+import 'package:snapshop/feature/profile/logic/cubit/orders_cubit.dart';
 import 'package:snapshop/feature/profile/presentation/screen/orders_screen.dart';
+import 'package:snapshop/feature/profile/presentation/screen/track_order_screen.dart';
 
 class OrderDetailsScreen extends StatelessWidget {
   final Order order;
   final OrderType type;
+  final OrdersCubit ordersCubit;
 
   const OrderDetailsScreen({
     super.key,
     required this.order,
     required this.type,
+    required this.ordersCubit,
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text("Order Details"),
+        title: Text(context.translate("orderDetails")),
+
         centerTitle: true,
         leading: const BackButton(),
       ),
@@ -27,21 +32,63 @@ class OrderDetailsScreen extends StatelessWidget {
                 child: Row(
                   children: [
                     Expanded(
-                      child: OutlinedButton(
-                        style: ButtonStyle(
-                          shape: WidgetStateProperty.all(
-                            RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(
-                                12,
-                              ), // 👈 هنا الـ radius
+                      child: BlocConsumer<OrdersCubit, OrdersState>(
+                        bloc: ordersCubit,
+                        listener: (context, state) {
+                          state.maybeWhen(
+                            cancelOrderSuccess: (model) {
+                              ShowToast.showToastSuccessTop(
+                                message:
+                                    model?.message ??
+                                    "Order cancelled successfully",
+                                context: context,
+                              );
+                              ordersCubit.getOrders();
+                              Navigator.pop(context);
+                            },
+                            cancelOrderFailure: (error) {
+                              ShowToast.showToastErrorTop(
+                                errorMessage:
+                                    error.message ?? "Failed to cancel order",
+                                context: context,
+                              );
+                            },
+                            orElse: () {},
+                          );
+                        },
+                        builder: (context, state) {
+                          final isLoading = state.maybeWhen(
+                            cancelOrderLoading: () => true,
+                            orElse: () => false,
+                          );
+                          return OutlinedButton(
+                            style: ButtonStyle(
+                              shape: WidgetStateProperty.all(
+                                RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12),
+                                ),
+                              ),
                             ),
-                          ),
-                        ),
-                        onPressed: () {},
-                        child: const Text(
-                          "Cancel Order",
-                          style: TextStyle(color: Colors.black),
-                        ),
+                            onPressed: isLoading
+                                ? null
+                                : () {
+                                    ordersCubit.fetchCancelOrder(order.id!);
+                                  },
+                            child: isLoading
+                                ? const SizedBox(
+                                    height: 20,
+                                    width: 20,
+                                    child: CircularProgressIndicator(
+                                      strokeWidth: 2,
+                                      color: Colors.black,
+                                    ),
+                                  )
+                                : Text(
+                                    context.translate("cancel"),
+                                    style: const TextStyle(color: Colors.black),
+                                  ),
+                          );
+                        },
                       ),
                     ),
                     const SizedBox(width: 12),
@@ -50,10 +97,20 @@ class OrderDetailsScreen extends StatelessWidget {
                         style: ButtonStyle(
                           backgroundColor: WidgetStatePropertyAll(Colors.black),
                         ),
-                        onPressed: () {},
-                        child: const Text(
-                          "Track Driver",
-                          style: TextStyle(color: Colors.white),
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => TrackOrderScreen(
+                                lat: order.driver!.latitude,
+                                lon: order.driver!.longitude,
+                              ),
+                            ),
+                          );
+                        },
+                        child: Text(
+                          context.translate("trackOrder"),
+                          style: const TextStyle(color: Colors.white),
                         ),
                       ),
                     ),
@@ -68,7 +125,7 @@ class OrderDetailsScreen extends StatelessWidget {
             child: ListView(
               padding: const EdgeInsets.all(16),
               children: [
-                _orderHeader(order),
+                _orderHeader(context, order, type),
 
                 const SizedBox(height: 16),
 
@@ -81,7 +138,7 @@ class OrderDetailsScreen extends StatelessWidget {
 
                 const SizedBox(height: 12),
 
-                _buildSummary(order),
+                _buildSummary(context, order),
               ],
             ),
           ),
@@ -91,8 +148,24 @@ class OrderDetailsScreen extends StatelessWidget {
   }
 }
 
-Widget _orderHeader(Order order) {
-  final isActive = order.status == 0;
+Widget _orderHeader(BuildContext context, Order order, OrderType type) {
+  String statusText;
+  Color statusColor;
+
+  switch (type) {
+    case OrderType.active:
+      statusText = context.translate("active");
+      statusColor = Colors.red;
+      break;
+    case OrderType.canceled:
+      statusText = context.translate("cancelled");
+      statusColor = Colors.black;
+      break;
+    case OrderType.completed:
+      statusText = context.translate("completedOrders");
+      statusColor = Colors.green;
+      break;
+  }
 
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
@@ -101,7 +174,7 @@ Widget _orderHeader(Order order) {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           Text(
-            "Order No. ${order.id}",
+            "${context.translate("orderNum")} ${order.id}",
             style: TextStyle(
               fontWeight: FontWeight.bold,
               color: Colors.black,
@@ -109,11 +182,8 @@ Widget _orderHeader(Order order) {
             ),
           ),
           Text(
-            isActive ? "Active" : "Completed",
-            style: TextStyle(
-              color: isActive ? Colors.red : Colors.green,
-              fontWeight: FontWeight.bold,
-            ),
+            statusText,
+            style: TextStyle(color: statusColor, fontWeight: FontWeight.bold),
           ),
         ],
       ),
@@ -244,7 +314,7 @@ class OrderItemCard extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(
-                "Total Order (1) :",
+                "${context.translate("total")} :",
                 style: TextStyle(
                   fontWeight: FontWeight.w600,
                   color: Colors.black,
@@ -267,18 +337,18 @@ class OrderItemCard extends StatelessWidget {
   }
 }
 
-Widget _buildSummary(Order order) {
+Widget _buildSummary(BuildContext context, Order order) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
-      _row("Subtotal", order.subtotal),
-      _row("Tax and Fees", order.tax),
-      _row("Delivery Fee", order.shipping),
+      _row(context.translate("subTotal"), order.subtotal),
+      _row(context.translate("tax"), order.tax),
+      _row(context.translate("deliveryFee"), order.shipping),
 
       const SizedBox(height: 10),
       const Divider(),
 
-      _row("Order Total", order.total, isBold: true, isRed: true),
+      _row(context.translate("total"), order.total, isBold: true, isRed: true),
 
       // if (type == OrderType.active)
       //   Column(

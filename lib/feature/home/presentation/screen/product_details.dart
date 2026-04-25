@@ -30,7 +30,7 @@ class _ProductDetailsState extends State<ProductDetails> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Product"), centerTitle: true),
+      appBar: AppBar(title: Text(context.translate("Product")), centerTitle: true),
 
       body: Padding(
         padding: EdgeInsets.only(top: 25.h, left: 25.w, right: 25.w),
@@ -136,7 +136,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
                           backgroundColor: Colors.black,
-                          content: Text('Added $quantity item(s) to cart'),
+                          content: Text(context.translate("productAddedSuccessfully")),
                         ),
                       );
                     },
@@ -149,7 +149,7 @@ class _ProductDetailsState extends State<ProductDetails> {
                         Icon(IconlyBold.buy, color: Colors.white),
                         SizedBox(width: 10.w),
                         Text(
-                          "Add To Cart",
+                          context.translate("addToCart"),
                           style: TextStyle(
                             fontSize: 14.sp,
                             color: Colors.white,

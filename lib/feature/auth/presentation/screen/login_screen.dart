@@ -82,7 +82,7 @@ class LoginScreen extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Welcome\n Back !",
+                      context.translate("welcomeBack"),
                       textAlign: TextAlign.left,
 
                       style: TextStyle(
@@ -97,17 +97,17 @@ class LoginScreen extends StatelessWidget {
                       controller: authCubit.email,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "Email is required";
+                          return context.translate("pleaseEnterValidEmail");
                         }
 
                         if (!AppRegex.isEmailValid(value)) {
-                          return "Enter a valid email";
+                          return context.translate("pleaseEnterValidEmail");
                         }
 
                         return null;
                       },
                       decoration: InputDecoration(
-                        hintText: "Email",
+                        hintText: context.translate("email"),
                         focusedBorder: OutlineInputBorder(
                           borderRadius: BorderRadius.all(Radius.circular(8.r)),
                           borderSide: BorderSide(color: Colors.black54),
@@ -120,11 +120,11 @@ class LoginScreen extends StatelessWidget {
                       obscureText: authCubit.showPass,
                       validator: (value) {
                         if (value == null || value.isEmpty) {
-                          return "Password is required";
+                          return context.translate("pleaseEnterValidPassword");
                         }
 
                         if (!AppRegex.isPasswordValid(value)) {
-                          return "Enter a valid password";
+                          return context.translate("pleaseEnterValidPassword");
                         }
 
                         return null;
@@ -136,7 +136,7 @@ class LoginScreen extends StatelessWidget {
                           borderSide: BorderSide(color: Colors.black54),
                         ),
 
-                        hintText: "Password",
+                        hintText: context.translate("password"),
                         suffixIcon: IconButton(
                           onPressed: () => authCubit.toggleShowPassword(),
                           icon: Icon(
@@ -166,7 +166,7 @@ class LoginScreen extends StatelessWidget {
                             strokeWidth: 2,
                           ),
                           orElse: () => Text(
-                            "Login",
+                            context.translate("logIn"),
                             style: TextStyle(
                               fontSize: 16.sp,
                               color: Colors.white,
@@ -179,14 +179,14 @@ class LoginScreen extends StatelessWidget {
                     Center(
                       child: Text.rich(
                         TextSpan(
-                          text: "Don't have an account? ",
+                          text: "${context.translate("dontHaveAnAccount")} ",
                           style: TextStyle(
                             fontSize: 14.sp,
                             color: Colors.black54,
                           ),
                           children: [
                             TextSpan(
-                              text: "Sign Up",
+                              text: context.translate("signUp"),
 
                               style: TextStyle(
                                 fontSize: 18.sp,

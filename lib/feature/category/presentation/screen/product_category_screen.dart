@@ -17,7 +17,7 @@ class ProductsCategoryScreen extends StatelessWidget {
       body: products.isEmpty
           ? Center(
               child: Text(
-                'No products available',
+                context.translate("emptyCategory") ?? 'No products available',
                 style: TextStyle(fontSize: 12.sp, color: Colors.grey),
               ),
             )

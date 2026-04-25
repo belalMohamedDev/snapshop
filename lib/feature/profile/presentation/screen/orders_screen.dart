@@ -2,6 +2,7 @@ import 'package:snapshop/core/common/shared/shared_imports.dart';
 import 'package:snapshop/feature/profile/data/model/orders_model.dart';
 import 'package:snapshop/feature/profile/logic/cubit/orders_cubit.dart';
 import 'package:snapshop/feature/profile/presentation/screen/orders_details.dart';
+import 'package:snapshop/feature/profile/presentation/screen/track_order_screen.dart';
 
 enum OrderType { active, completed, canceled }
 
@@ -16,24 +17,50 @@ class MyOrdersScreen extends StatelessWidget {
         length: 3,
         child: Scaffold(
           appBar: AppBar(
-            title: const Text("My Orders"),
+            title: Text(context.translate("myOrders")),
+
             centerTitle: true,
-            bottom: const TabBar(
+            bottom: TabBar(
+              onTap: (int index) {},
               labelColor: Colors.black,
               indicatorColor: Colors.black,
               unselectedLabelColor: Colors.black54,
               tabs: [
-                Tab(text: "Active"),
-                Tab(text: "Completed"),
-                Tab(text: "Canceled"),
+                Tab(text: context.translate("active")),
+                Tab(text: context.translate("completedOrders")),
+                Tab(text: context.translate("cancelled")),
               ],
             ),
           ),
 
-          body: BlocBuilder<OrdersCubit, OrdersState>(
+          body: BlocConsumer<OrdersCubit, OrdersState>(
+            listener: (context, state) {
+              state.maybeWhen(
+                cancelOrderSuccess: (model) {
+                  ShowToast.showToastSuccessTop(
+                    message: model?.message ?? "Order cancelled successfully",
+                    context: context,
+                  );
+                  context.read<OrdersCubit>().getOrders();
+                },
+                cancelOrderFailure: (error) {
+                  ShowToast.showToastErrorTop(
+                    errorMessage: error.message ?? "Failed to cancel order",
+                    context: context,
+                  );
+                },
+                orElse: () {},
+              );
+            },
+            buildWhen: (previous, current) => current.maybeWhen(
+              getOrdersLoading: () => true,
+              getOrdersSuccess: (_) => true,
+              getOrdersFailure: (_) => true,
+              orElse: () => false,
+            ),
             builder: (context, state) {
-              return state.when(
-                initial: () => const SizedBox(),
+              return state.maybeWhen(
+                orElse: () => const SizedBox(),
 
                 getOrdersLoading: () =>
                     const Center(child: CircularProgressIndicator()),
@@ -49,14 +76,17 @@ class MyOrdersScreen extends StatelessWidget {
                       OrdersList(
                         orders: orders?.active ?? [],
                         type: OrderType.active,
+                        ordersCubit: context.read<OrdersCubit>(),
                       ),
                       OrdersList(
                         orders: orders?.completed ?? [],
                         type: OrderType.completed,
+                        ordersCubit: context.read<OrdersCubit>(),
                       ),
                       OrdersList(
                         orders: orders?.canceled ?? [],
                         type: OrderType.canceled,
+                        ordersCubit: context.read<OrdersCubit>(),
                       ),
                     ],
                   );
@@ -73,8 +103,14 @@ class MyOrdersScreen extends StatelessWidget {
 class OrdersList extends StatelessWidget {
   final List<Order> orders;
   final OrderType type;
+  final OrdersCubit ordersCubit;
 
-  const OrdersList({super.key, required this.orders, required this.type});
+  const OrdersList({
+    super.key,
+    required this.orders,
+    required this.type,
+    required this.ordersCubit,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -89,7 +125,11 @@ class OrdersList extends StatelessWidget {
         itemCount: orders.length,
         separatorBuilder: (_, _) => const SizedBox(height: 12),
         itemBuilder: (_, index) {
-          return OrderCard(order: orders[index], type: type);
+          return OrderCard(
+            order: orders[index],
+            type: type,
+            ordersCubit: ordersCubit,
+          );
         },
       ),
     );
@@ -103,13 +143,12 @@ class EmptyOrdersWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Column(
-        // mainAxisSize: MainAxisSize.c,
         children: [
           SizedBox(height: 120.h),
           Icon(IconlyBold.paper, size: 180.h, color: Colors.black87),
           SizedBox(height: 25.h),
           Text(
-            "You don't have any\n active orders at this\n time",
+            context.translate("youDontHaveAnyActiveOrders"),
             textAlign: TextAlign.center,
             style: TextStyle(fontSize: 20.sp, color: Colors.black),
           ),
@@ -122,8 +161,14 @@ class EmptyOrdersWidget extends StatelessWidget {
 class OrderCard extends StatelessWidget {
   final Order order;
   final OrderType type;
+  final OrdersCubit ordersCubit;
 
-  const OrderCard({super.key, required this.order, required this.type});
+  const OrderCard({
+    super.key,
+    required this.order,
+    required this.type,
+    required this.ordersCubit,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -140,7 +185,11 @@ class OrderCard extends StatelessWidget {
         Navigator.push(
           context,
           MaterialPageRoute(
-            builder: (context) => OrderDetailsScreen(order: order, type: type),
+            builder: (context) => OrderDetailsScreen(
+              order: order,
+              type: type,
+              ordersCubit: ordersCubit,
+            ),
           ),
         );
       },
@@ -214,15 +263,42 @@ class OrderCard extends StatelessWidget {
                   SizedBox(
                     height: 36.h,
                     width: 90.w,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                        backgroundColor: WidgetStateProperty.all(Colors.black),
-                      ),
-                      onPressed: () {},
-                      child: Text(
-                        "Cancel",
-                        style: TextStyle(fontSize: 12.sp, color: Colors.white),
-                      ),
+                    child: BlocBuilder<OrdersCubit, OrdersState>(
+                      bloc: ordersCubit,
+                      builder: (context, state) {
+                        final isLoading = state.maybeWhen(
+                          cancelOrderLoading: () => true,
+                          orElse: () => false,
+                        );
+                        return ElevatedButton(
+                          style: ButtonStyle(
+                            backgroundColor: WidgetStateProperty.all(
+                              Colors.black,
+                            ),
+                          ),
+                          onPressed: isLoading
+                              ? null
+                              : () {
+                                  ordersCubit.fetchCancelOrder(order.id!);
+                                },
+                          child: isLoading
+                              ? const SizedBox(
+                                  height: 20,
+                                  width: 20,
+                                  child: CircularProgressIndicator(
+                                    strokeWidth: 2,
+                                    color: Colors.white,
+                                  ),
+                                )
+                              : Text(
+                                  context.translate("cancel"),
+                                  style: TextStyle(
+                                    fontSize: 12.sp,
+                                    color: Colors.white,
+                                  ),
+                                ),
+                        );
+                      },
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -233,9 +309,19 @@ class OrderCard extends StatelessWidget {
                       style: ButtonStyle(
                         backgroundColor: WidgetStateProperty.all(Colors.black),
                       ),
-                      onPressed: () {},
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TrackOrderScreen(
+                              lat: order.driver!.latitude,
+                              lon: order.driver!.longitude,
+                            ),
+                          ),
+                        );
+                      },
                       child: Text(
-                        "Track",
+                        context.translate("trackOrder"),
                         style: TextStyle(fontSize: 12.sp, color: Colors.white),
                       ),
                     ),

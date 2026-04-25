@@ -54,4 +54,7 @@ abstract class AppServiceClient {
   Future<ApiSuccessGeneralModel> placeOrder(
     @Body() PlaceOrderRequest placeOrderRequest,
   );
+
+  @POST("${ApiConstants.cancelOrder}/{id}")
+  Future<ApiSuccessGeneralModel> cancelOrder(@Path('id') int id);
 }
