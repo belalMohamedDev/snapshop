@@ -1,5 +1,6 @@
 import 'package:device_preview/device_preview.dart';
 import 'package:snapshop/core/common/shared/shared_imports.dart';
+import 'package:snapshop/feature/cart/cubit/cart_cubit.dart';
 
 class MyApp extends StatefulWidget {
   const MyApp._internal(); // private named constructor
@@ -21,6 +22,7 @@ class _MyAppState extends State<MyApp> {
         BlocProvider(
           create: (context) => instance<AppLogicCubit>()..getSavedLanguage(),
         ),
+        BlocProvider(create: (context) => instance<CartCubit>()),
       ],
       child: ScreenUtilInit(
         designSize: const Size(375, 812),

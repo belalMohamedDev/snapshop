@@ -55,11 +55,16 @@ extension CartStatePatterns on CartState {
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,required TResult orElse(),}){
+@optionalTypeArgs TResult maybeMap<TResult extends Object?>({TResult Function( _Initial value)?  initial,TResult Function( _Loading value)?  loading,TResult Function( _Loaded value)?  loaded,TResult Function( _PlaceOrderLoading value)?  placeOrderLoading,TResult Function( _PlaceOrderSuccess value)?  placeOrderSuccess,TResult Function( _PlaceOrderFailure value)?  placeOrderFailure,required TResult orElse(),}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
-return initial(_that);case _:
+return initial(_that);case _Loading() when loading != null:
+return loading(_that);case _Loaded() when loaded != null:
+return loaded(_that);case _PlaceOrderLoading() when placeOrderLoading != null:
+return placeOrderLoading(_that);case _PlaceOrderSuccess() when placeOrderSuccess != null:
+return placeOrderSuccess(_that);case _PlaceOrderFailure() when placeOrderFailure != null:
+return placeOrderFailure(_that);case _:
   return orElse();
 
 }
@@ -77,11 +82,16 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,}){
+@optionalTypeArgs TResult map<TResult extends Object?>({required TResult Function( _Initial value)  initial,required TResult Function( _Loading value)  loading,required TResult Function( _Loaded value)  loaded,required TResult Function( _PlaceOrderLoading value)  placeOrderLoading,required TResult Function( _PlaceOrderSuccess value)  placeOrderSuccess,required TResult Function( _PlaceOrderFailure value)  placeOrderFailure,}){
 final _that = this;
 switch (_that) {
 case _Initial():
-return initial(_that);case _:
+return initial(_that);case _Loading():
+return loading(_that);case _Loaded():
+return loaded(_that);case _PlaceOrderLoading():
+return placeOrderLoading(_that);case _PlaceOrderSuccess():
+return placeOrderSuccess(_that);case _PlaceOrderFailure():
+return placeOrderFailure(_that);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -98,11 +108,16 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,}){
+@optionalTypeArgs TResult? mapOrNull<TResult extends Object?>({TResult? Function( _Initial value)?  initial,TResult? Function( _Loading value)?  loading,TResult? Function( _Loaded value)?  loaded,TResult? Function( _PlaceOrderLoading value)?  placeOrderLoading,TResult? Function( _PlaceOrderSuccess value)?  placeOrderSuccess,TResult? Function( _PlaceOrderFailure value)?  placeOrderFailure,}){
 final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
-return initial(_that);case _:
+return initial(_that);case _Loading() when loading != null:
+return loading(_that);case _Loaded() when loaded != null:
+return loaded(_that);case _PlaceOrderLoading() when placeOrderLoading != null:
+return placeOrderLoading(_that);case _PlaceOrderSuccess() when placeOrderSuccess != null:
+return placeOrderSuccess(_that);case _PlaceOrderFailure() when placeOrderFailure != null:
+return placeOrderFailure(_that);case _:
   return null;
 
 }
@@ -119,10 +134,15 @@ return initial(_that);case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,required TResult orElse(),}) {final _that = this;
+@optionalTypeArgs TResult maybeWhen<TResult extends Object?>({TResult Function()?  initial,TResult Function()?  loading,TResult Function( List<CartItemModel> products)?  loaded,TResult Function()?  placeOrderLoading,TResult Function( ApiSuccessGeneralModel? apiSuccessGeneralModel)?  placeOrderSuccess,TResult Function( ApiErrorModel error)?  placeOrderFailure,required TResult orElse(),}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
-return initial();case _:
+return initial();case _Loading() when loading != null:
+return loading();case _Loaded() when loaded != null:
+return loaded(_that.products);case _PlaceOrderLoading() when placeOrderLoading != null:
+return placeOrderLoading();case _PlaceOrderSuccess() when placeOrderSuccess != null:
+return placeOrderSuccess(_that.apiSuccessGeneralModel);case _PlaceOrderFailure() when placeOrderFailure != null:
+return placeOrderFailure(_that.error);case _:
   return orElse();
 
 }
@@ -140,10 +160,15 @@ return initial();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,}) {final _that = this;
+@optionalTypeArgs TResult when<TResult extends Object?>({required TResult Function()  initial,required TResult Function()  loading,required TResult Function( List<CartItemModel> products)  loaded,required TResult Function()  placeOrderLoading,required TResult Function( ApiSuccessGeneralModel? apiSuccessGeneralModel)  placeOrderSuccess,required TResult Function( ApiErrorModel error)  placeOrderFailure,}) {final _that = this;
 switch (_that) {
 case _Initial():
-return initial();case _:
+return initial();case _Loading():
+return loading();case _Loaded():
+return loaded(_that.products);case _PlaceOrderLoading():
+return placeOrderLoading();case _PlaceOrderSuccess():
+return placeOrderSuccess(_that.apiSuccessGeneralModel);case _PlaceOrderFailure():
+return placeOrderFailure(_that.error);case _:
   throw StateError('Unexpected subclass');
 
 }
@@ -160,10 +185,15 @@ return initial();case _:
 /// }
 /// ```
 
-@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,}) {final _that = this;
+@optionalTypeArgs TResult? whenOrNull<TResult extends Object?>({TResult? Function()?  initial,TResult? Function()?  loading,TResult? Function( List<CartItemModel> products)?  loaded,TResult? Function()?  placeOrderLoading,TResult? Function( ApiSuccessGeneralModel? apiSuccessGeneralModel)?  placeOrderSuccess,TResult? Function( ApiErrorModel error)?  placeOrderFailure,}) {final _that = this;
 switch (_that) {
 case _Initial() when initial != null:
-return initial();case _:
+return initial();case _Loading() when loading != null:
+return loading();case _Loaded() when loaded != null:
+return loaded(_that.products);case _PlaceOrderLoading() when placeOrderLoading != null:
+return placeOrderLoading();case _PlaceOrderSuccess() when placeOrderSuccess != null:
+return placeOrderSuccess(_that.apiSuccessGeneralModel);case _PlaceOrderFailure() when placeOrderFailure != null:
+return placeOrderFailure(_that.error);case _:
   return null;
 
 }
@@ -202,5 +232,273 @@ String toString() {
 
 
 
+
+/// @nodoc
+
+
+class _Loading implements CartState {
+  const _Loading();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loading);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'CartState.loading()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _Loaded implements CartState {
+  const _Loaded({required final  List<CartItemModel> products}): _products = products;
+  
+
+ final  List<CartItemModel> _products;
+ List<CartItemModel> get products {
+  if (_products is EqualUnmodifiableListView) return _products;
+  // ignore: implicit_dynamic_type
+  return EqualUnmodifiableListView(_products);
+}
+
+
+/// Create a copy of CartState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$LoadedCopyWith<_Loaded> get copyWith => __$LoadedCopyWithImpl<_Loaded>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Loaded&&const DeepCollectionEquality().equals(other._products, _products));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,const DeepCollectionEquality().hash(_products));
+
+@override
+String toString() {
+  return 'CartState.loaded(products: $products)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$LoadedCopyWith<$Res> implements $CartStateCopyWith<$Res> {
+  factory _$LoadedCopyWith(_Loaded value, $Res Function(_Loaded) _then) = __$LoadedCopyWithImpl;
+@useResult
+$Res call({
+ List<CartItemModel> products
+});
+
+
+
+
+}
+/// @nodoc
+class __$LoadedCopyWithImpl<$Res>
+    implements _$LoadedCopyWith<$Res> {
+  __$LoadedCopyWithImpl(this._self, this._then);
+
+  final _Loaded _self;
+  final $Res Function(_Loaded) _then;
+
+/// Create a copy of CartState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? products = null,}) {
+  return _then(_Loaded(
+products: null == products ? _self._products : products // ignore: cast_nullable_to_non_nullable
+as List<CartItemModel>,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _PlaceOrderLoading implements CartState {
+  const _PlaceOrderLoading();
+  
+
+
+
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PlaceOrderLoading);
+}
+
+
+@override
+int get hashCode => runtimeType.hashCode;
+
+@override
+String toString() {
+  return 'CartState.placeOrderLoading()';
+}
+
+
+}
+
+
+
+
+/// @nodoc
+
+
+class _PlaceOrderSuccess implements CartState {
+  const _PlaceOrderSuccess({this.apiSuccessGeneralModel});
+  
+
+ final  ApiSuccessGeneralModel? apiSuccessGeneralModel;
+
+/// Create a copy of CartState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$PlaceOrderSuccessCopyWith<_PlaceOrderSuccess> get copyWith => __$PlaceOrderSuccessCopyWithImpl<_PlaceOrderSuccess>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PlaceOrderSuccess&&(identical(other.apiSuccessGeneralModel, apiSuccessGeneralModel) || other.apiSuccessGeneralModel == apiSuccessGeneralModel));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,apiSuccessGeneralModel);
+
+@override
+String toString() {
+  return 'CartState.placeOrderSuccess(apiSuccessGeneralModel: $apiSuccessGeneralModel)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$PlaceOrderSuccessCopyWith<$Res> implements $CartStateCopyWith<$Res> {
+  factory _$PlaceOrderSuccessCopyWith(_PlaceOrderSuccess value, $Res Function(_PlaceOrderSuccess) _then) = __$PlaceOrderSuccessCopyWithImpl;
+@useResult
+$Res call({
+ ApiSuccessGeneralModel? apiSuccessGeneralModel
+});
+
+
+
+
+}
+/// @nodoc
+class __$PlaceOrderSuccessCopyWithImpl<$Res>
+    implements _$PlaceOrderSuccessCopyWith<$Res> {
+  __$PlaceOrderSuccessCopyWithImpl(this._self, this._then);
+
+  final _PlaceOrderSuccess _self;
+  final $Res Function(_PlaceOrderSuccess) _then;
+
+/// Create a copy of CartState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? apiSuccessGeneralModel = freezed,}) {
+  return _then(_PlaceOrderSuccess(
+apiSuccessGeneralModel: freezed == apiSuccessGeneralModel ? _self.apiSuccessGeneralModel : apiSuccessGeneralModel // ignore: cast_nullable_to_non_nullable
+as ApiSuccessGeneralModel?,
+  ));
+}
+
+
+}
+
+/// @nodoc
+
+
+class _PlaceOrderFailure implements CartState {
+  const _PlaceOrderFailure(this.error);
+  
+
+ final  ApiErrorModel error;
+
+/// Create a copy of CartState
+/// with the given fields replaced by the non-null parameter values.
+@JsonKey(includeFromJson: false, includeToJson: false)
+@pragma('vm:prefer-inline')
+_$PlaceOrderFailureCopyWith<_PlaceOrderFailure> get copyWith => __$PlaceOrderFailureCopyWithImpl<_PlaceOrderFailure>(this, _$identity);
+
+
+
+@override
+bool operator ==(Object other) {
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _PlaceOrderFailure&&(identical(other.error, error) || other.error == error));
+}
+
+
+@override
+int get hashCode => Object.hash(runtimeType,error);
+
+@override
+String toString() {
+  return 'CartState.placeOrderFailure(error: $error)';
+}
+
+
+}
+
+/// @nodoc
+abstract mixin class _$PlaceOrderFailureCopyWith<$Res> implements $CartStateCopyWith<$Res> {
+  factory _$PlaceOrderFailureCopyWith(_PlaceOrderFailure value, $Res Function(_PlaceOrderFailure) _then) = __$PlaceOrderFailureCopyWithImpl;
+@useResult
+$Res call({
+ ApiErrorModel error
+});
+
+
+
+
+}
+/// @nodoc
+class __$PlaceOrderFailureCopyWithImpl<$Res>
+    implements _$PlaceOrderFailureCopyWith<$Res> {
+  __$PlaceOrderFailureCopyWithImpl(this._self, this._then);
+
+  final _PlaceOrderFailure _self;
+  final $Res Function(_PlaceOrderFailure) _then;
+
+/// Create a copy of CartState
+/// with the given fields replaced by the non-null parameter values.
+@pragma('vm:prefer-inline') $Res call({Object? error = null,}) {
+  return _then(_PlaceOrderFailure(
+null == error ? _self.error : error // ignore: cast_nullable_to_non_nullable
+as ApiErrorModel,
+  ));
+}
+
+
+}
 
 // dart format on

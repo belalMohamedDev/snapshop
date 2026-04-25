@@ -11,7 +11,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 60.h),
+        padding: EdgeInsets.symmetric(horizontal: 20.w, vertical: 40.h),
         child: CustomScrollView(
           slivers: [
             SliverToBoxAdapter(

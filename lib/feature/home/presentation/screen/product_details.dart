@@ -1,9 +1,31 @@
 import 'package:snapshop/core/common/shared/shared_imports.dart';
+import 'package:snapshop/feature/cart/cubit/cart_cubit.dart';
 import 'package:snapshop/feature/home/data/model/product_model.dart';
 
-class ProductDetails extends StatelessWidget {
+class ProductDetails extends StatefulWidget {
   const ProductDetails(this.product, {super.key});
   final Products product;
+
+  @override
+  State<ProductDetails> createState() => _ProductDetailsState();
+}
+
+class _ProductDetailsState extends State<ProductDetails> {
+  int quantity = 1;
+
+  void incrementQuantity() {
+    setState(() {
+      quantity++;
+    });
+  }
+
+  void decrementQuantity() {
+    setState(() {
+      if (quantity > 1) {
+        quantity--;
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +41,7 @@ class ProductDetails extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12.r),
                 child: CachedNetworkImage(
-                  imageUrl: product.imagePath ?? '',
+                  imageUrl: widget.product.imagePath ?? '',
                   width: 360.w,
                   height: 300.h,
                   fit: BoxFit.cover,
@@ -30,7 +52,7 @@ class ProductDetails extends StatelessWidget {
             SizedBox(height: 30.h),
 
             Text(
-              product.name!,
+              widget.product.name!,
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.w600,
@@ -41,7 +63,7 @@ class ProductDetails extends StatelessWidget {
             SizedBox(height: 10.h),
 
             Text(
-              product.description!,
+              widget.product.description!,
               style: TextStyle(
                 color: Colors.black,
                 fontWeight: FontWeight.w400,
@@ -52,7 +74,7 @@ class ProductDetails extends StatelessWidget {
             Row(
               children: [
                 Text(
-                  "${product.price!} \$",
+                  "${widget.product.price!} \$",
                   style: TextStyle(
                     color: Colors.green.shade900,
                     fontWeight: FontWeight.w600,
@@ -68,13 +90,15 @@ class ProductDetails extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.r),
                     color: Colors.black,
                   ),
-
-                  child: Icon(Icons.remove, color: Colors.white),
+                  child: InkWell(
+                    onTap: decrementQuantity,
+                    child: Icon(Icons.remove, color: Colors.white),
+                  ),
                 ),
                 SizedBox(width: 10.w),
 
                 Text(
-                  "1",
+                  quantity.toString(),
                   style: TextStyle(
                     color: Colors.black,
                     fontWeight: FontWeight.w400,
@@ -90,39 +114,53 @@ class ProductDetails extends StatelessWidget {
                     borderRadius: BorderRadius.circular(8.r),
                     color: Colors.black,
                   ),
-
-                  child: Icon(Icons.add, color: Colors.white),
+                  child: InkWell(
+                    onTap: incrementQuantity,
+                    child: Icon(Icons.add, color: Colors.white),
+                  ),
                 ),
               ],
             ),
             SizedBox(height: 35.h),
-            //TODO: Add to cart local storage
-            SizedBox(
-              width: 325.w,
-              height: 45.h,
-
-              child: ElevatedButton(
-                onPressed: () {},
-
-                style: ButtonStyle(
-                  backgroundColor: WidgetStatePropertyAll(Colors.black),
-                ),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(IconlyBold.buy, color: Colors.white),
-                    SizedBox(width: 10.w),
-                    Text(
-                      "Add To Cart",
-                      style: TextStyle(
-                        fontSize: 14.sp,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w500,
-                      ),
+            BlocBuilder<CartCubit, CartState>(
+              builder: (context, state) {
+                return SizedBox(
+                  width: 325.w,
+                  height: 45.h,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      context.read<CartCubit>().addToCart(
+                        widget.product,
+                        quantity: quantity,
+                      );
+                      ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(
+                          backgroundColor: Colors.black,
+                          content: Text('Added $quantity item(s) to cart'),
+                        ),
+                      );
+                    },
+                    style: ButtonStyle(
+                      backgroundColor: WidgetStatePropertyAll(Colors.black),
                     ),
-                  ],
-                ),
-              ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Icon(IconlyBold.buy, color: Colors.white),
+                        SizedBox(width: 10.w),
+                        Text(
+                          "Add To Cart",
+                          style: TextStyle(
+                            fontSize: 14.sp,
+                            color: Colors.white,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                );
+              },
             ),
           ],
         ),

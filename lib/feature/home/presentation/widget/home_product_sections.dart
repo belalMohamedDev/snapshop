@@ -113,7 +113,7 @@ class _TopRatedSection extends StatelessWidget {
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: products.length,
-        separatorBuilder: (_, __) => SizedBox(width: 12.w),
+        separatorBuilder: (_, _) => SizedBox(width: 12.w),
         itemBuilder: (context, index) {
           final product = products[index];
 
@@ -194,7 +194,7 @@ class _TopRatedSection extends StatelessWidget {
                     children: [
                       RatingBarIndicator(
                         rating: _normalizeRating(product.rating),
-                        itemBuilder: (_, __) => const Icon(
+                        itemBuilder: (_, _) => const Icon(
                           Icons.star_rounded,
                           color: Color(0xFFFFB703),
                         ),

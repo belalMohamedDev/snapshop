@@ -87,7 +87,7 @@ class OrdersList extends StatelessWidget {
       child: ListView.separated(
         padding: const EdgeInsets.all(16),
         itemCount: orders.length,
-        separatorBuilder: (_, __) => const SizedBox(height: 12),
+        separatorBuilder: (_, _) => const SizedBox(height: 12),
         itemBuilder: (_, index) {
           return OrderCard(order: orders[index], type: type);
         },
@@ -162,7 +162,7 @@ class OrderCard extends StatelessWidget {
                       width: 90,
                       height: 90,
                       fit: BoxFit.cover,
-                      errorBuilder: (_, __, ___) => _placeholderImage(),
+                      errorBuilder: (_, _, _) => _placeholderImage(),
                     )
                   : _placeholderImage(),
             ),

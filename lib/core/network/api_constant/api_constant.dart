@@ -11,5 +11,6 @@ class ApiConstants {
   static const String categories = 'categories';
   static const String topRatedProducts = 'top_rated_products';
   static const String bestSellerProducts = 'best_seller_products';
+  static const String placeOrder = 'place_order';
   static const String refreshToken = '${baseUrl}refresh_token';
 }

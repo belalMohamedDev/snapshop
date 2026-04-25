@@ -152,7 +152,7 @@ class OrderItemCard extends StatelessWidget {
                   width: 90.w,
                   height: 90.h,
                   fit: BoxFit.fill,
-                  errorBuilder: (_, __, ___) => Container(
+                  errorBuilder: (_, _, _) => Container(
                     width: 80,
                     height: 80,
                     color: Colors.grey.shade200,

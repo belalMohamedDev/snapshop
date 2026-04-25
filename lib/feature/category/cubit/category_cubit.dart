@@ -28,9 +28,7 @@ class CategoryCubit extends Cubit<CategoryState> {
         );
       },
       failure: (error) {
-        print("Error fetching categories: ${error.message}");
-        print("Error fetching categories: ${error.status}");
-
+  
         emit(CategoryState.categoriesFailure(error));
       },
     );

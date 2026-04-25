@@ -1,11 +1,10 @@
 import 'package:crystal_navigation_bar/crystal_navigation_bar.dart';
 import 'package:snapshop/core/common/shared/shared_imports.dart';
-import 'package:snapshop/feature/cart/presentation/screen/cart_screen.dart';
 import 'package:snapshop/feature/category/presentation/screen/category_screen.dart';
 import 'package:snapshop/feature/home/presentation/screen/home_screen.dart';
 import 'package:snapshop/feature/profile/presentation/screen/profile_screen.dart';
 
-enum _SelectedTab { home, items, cart, profile }
+enum _SelectedTab { home, items, profile }
 
 class BottomNavBar extends StatefulWidget {
   const BottomNavBar({super.key});
@@ -26,7 +25,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
   final List<Widget> _screens = [
     const HomeScreen(),
     const CategoryScreen(),
-    const CartScreen(),
+    // const CartScreen(),
     const ProfileScreen(),
   ];
   @override
@@ -51,7 +50,7 @@ class _BottomNavBarState extends State<BottomNavBar> {
             selectedColor: Colors.white,
           ),
 
-          /// category
+          // /// category
           CrystalNavigationBarItem(
             icon: IconlyBold.category,
             unselectedIcon: IconlyLight.category,
@@ -59,11 +58,11 @@ class _BottomNavBarState extends State<BottomNavBar> {
           ),
 
           /// Favourite
-          CrystalNavigationBarItem(
-            icon: IconlyBold.bag,
-            unselectedIcon: IconlyLight.bag,
-            selectedColor: Colors.white,
-          ),
+          // CrystalNavigationBarItem(
+          //   icon: IconlyBold.bag,
+          //   unselectedIcon: IconlyLight.bag,
+          //   selectedColor: Colors.white,
+          // ),
 
           /// profile
           CrystalNavigationBarItem(

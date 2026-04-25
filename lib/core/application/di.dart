@@ -3,6 +3,8 @@ import 'package:hive_flutter/hive_flutter.dart';
 import 'package:snapshop/core/common/shared/shared_imports.dart';
 import 'package:snapshop/feature/auth/cubit/auth_cubit.dart';
 import 'package:snapshop/feature/auth/data/repo/auth_repo.dart';
+import 'package:snapshop/feature/cart/cubit/cart_cubit.dart';
+import 'package:snapshop/feature/cart/data/repo/cart_repo.dart';
 import 'package:snapshop/feature/category/cubit/category_cubit.dart';
 import 'package:snapshop/feature/category/data/repo/category_repo.dart';
 import 'package:snapshop/feature/home/logic/homeCubit/home_cubit.dart';
@@ -23,6 +25,7 @@ Future<void> initAppModule() async {
     _initAuthModule(),
     _initHomeModule(),
     _initCategoryModule(),
+    _initCartModule(),
     _initUpdateProfileModule(),
     _initOrdersModule(),
   ]);
@@ -70,6 +73,12 @@ Future<void> _initCategoryModule() async {
   instance
     ..registerLazySingleton<CategoryRepo>(() => CategoryRepoImpl(instance()))
     ..registerFactory<CategoryCubit>(() => CategoryCubit(instance()));
+}
+
+Future<void> _initCartModule() async {
+  instance
+    ..registerLazySingleton<CartRepo>(() => CartRepoImpl(instance()))
+    ..registerFactory<CartCubit>(() => CartCubit(instance()));
 }
 
 Future<void> _initUpdateProfileModule() async {

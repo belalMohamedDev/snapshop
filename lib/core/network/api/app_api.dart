@@ -2,6 +2,7 @@ import 'package:retrofit/retrofit.dart';
 
 import 'package:snapshop/core/common/shared/shared_imports.dart';
 import 'package:snapshop/feature/auth/data/model/auth_response.dart';
+import 'package:snapshop/feature/cart/data/model/place_order_request.dart';
 import 'package:snapshop/feature/category/data/model/category_model.dart';
 import 'package:snapshop/feature/home/data/model/product_model.dart';
 import 'package:snapshop/feature/home/data/model/slider_model.dart';
@@ -48,4 +49,9 @@ abstract class AppServiceClient {
 
   @GET(ApiConstants.topRatedProducts)
   Future<ProductModel> getTopRatedProducts();
+
+  @POST(ApiConstants.placeOrder)
+  Future<ApiSuccessGeneralModel> placeOrder(
+    @Body() PlaceOrderRequest placeOrderRequest,
+  );
 }
